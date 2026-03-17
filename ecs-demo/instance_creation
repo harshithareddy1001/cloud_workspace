@@ -1,0 +1,94 @@
+AWS EC2 Deployment Guide
+
+Stock Market Portfolio Management System
+
+1. Launch EC2 Instance
+
+Login to AWS Console.
+
+Go to EC2 Dashboard.
+
+Click Launch Instance.
+
+Configure:
+
+Name: stock-portfolio-server
+
+AMI: Ubuntu Server 22.04 LTS
+
+Instance Type: t2.micro (Free tier)
+
+Key Pair: Create or select existing key
+
+Security Group:
+
+Allow SSH (22)
+
+Allow HTTP (80)
+
+Allow Custom TCP (3000, 8080)
+
+Launch the instance.
+
+2. Connect to EC2 Instance
+ssh -i your-key.pem ubuntu@your-public-ip
+
+Example:
+
+ssh -i stock-key.pem ubuntu@13.233.xxx.xxx
+3. Install Docker
+
+Update system:
+
+sudo apt update
+
+Install Docker:
+
+sudo apt install docker.io -y
+
+Start Docker:
+
+sudo systemctl start docker
+sudo systemctl enable docker
+
+Verify:
+
+docker --version
+4. Install Docker Compose
+sudo apt install docker-compose -y
+
+Verify:
+
+docker-compose --version
+5. Pull Project from GitHub
+git clone https://github.com/your-username/stock-portfolio-project.git
+
+Go into project directory:
+
+cd stock-portfolio-project
+6. Pull Docker Images from Docker Hub
+docker-compose pull
+7. Run the Application
+docker-compose up -d
+
+This will start:
+
+Frontend (Port 3000)
+
+Backend API (Port 8080)
+
+MySQL Database (Port 3306)
+
+8. Access Application
+
+Open browser:
+
+http://YOUR_PUBLIC_IP:3000
+
+Example:
+
+http://13.233.xxx.xxx:3000
+9. Check Running Containers
+docker ps
+10. Stop Application
+docker-compose down
